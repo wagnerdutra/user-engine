@@ -1,5 +1,7 @@
 module.exports = {
   verbose: true,
+  clearMocks: true,
+  testEnvironment: 'node',
   collectCoverageFrom: [
     'src/app/**/*.js',
     '!src/app/jobs/index.js',
@@ -7,4 +9,3 @@ module.exports = {
   ],
   testRegex: '__tests__/.*\\.test\\.js$'
 }
-

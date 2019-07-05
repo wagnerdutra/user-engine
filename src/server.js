@@ -2,18 +2,38 @@ require('dotenv').config({
   path: process.env.NODE_ENV === 'test' ? '.env.local' : '.env'
 })
 
+const mongoose = require('mongoose')
 const express = require('express')
 const Youch = require('youch')
 const validate = require('express-validation')
 const routes = require('./routes')
+const { uri } = require('./config/database')
 
 class App {
   constructor() {
     this.express = express()
 
+    if (process.env.NODE_ENV !== 'test') {
+      this.database()
+    }
+
     this.middlewares()
     this.routes()
     this.exception()
+  }
+
+  database() {
+    mongoose.connect(
+      uri,
+      {
+        useCreateIndex: true,
+        useNewUrlParser: true,
+        useFindAndModify: false
+      },
+      err => {
+        if (err) throw err
+      }
+    )
   }
 
   middlewares() {
