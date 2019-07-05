@@ -48,4 +48,11 @@ describe('User', () => {
     expect(response.status).toBe(200)
     expect(response.body).toHaveProperty('token')
   })
+
+  it('should not login with wrong password', async () => {
+    await createUser()
+    const response = await makeLogin({ password: 'teststesett' })
+    expect(response.status).toBe(400)
+    expect(response.body).toEqual({ error: 'Invalid password' })
+  })
 })
