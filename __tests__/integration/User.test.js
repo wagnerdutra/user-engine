@@ -55,4 +55,17 @@ describe('User', () => {
     expect(response.status).toBe(400)
     expect(response.body).toEqual({ error: 'Invalid password' })
   })
+
+  it('should validate token as valid', async () => {
+    await createUser()
+    const {
+      body: { token }
+    } = await makeLogin()
+    const response = await request(app)
+      .get('/checkToken')
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(response.status).toBe(200)
+    expect(response.body).toEqual({ ok: true })
+  })
 })
