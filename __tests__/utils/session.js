@@ -8,15 +8,9 @@ const initialUser = {
   password: faker.internet.password()
 }
 
-const createUser = async (user = {}) => {
-  const response = await request(app)
-    .post('/')
+const makeLogin = async (user = {}) =>
+  request(app)
+    .post('/login')
     .send({ ...initialUser, ...user })
-  return {
-    response,
-    user: response.body,
-    passwordDecrypted: initialUser.password
-  }
-}
 
-module.exports = { createUser }
+module.exports = { makeLogin }
