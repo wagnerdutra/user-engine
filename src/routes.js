@@ -11,9 +11,14 @@ const Session = require('./app/validators/Session')
 const authMiddleware = require('./app/middlewares/auth')
 
 routes.post('/', validator(User), handler(UserController.create))
+routes.put('/', authMiddleware, UserController.update)
 
 routes.post('/login', validator(Session), handler(SessionController.create))
 
-routes.get('/checkToken', authMiddleware, (req, res) => res.json({ ok: true }))
+routes.get(
+  '/checkToken',
+  authMiddleware,
+  handler((req, res) => res.json({ ok: true }))
+)
 
 module.exports = routes

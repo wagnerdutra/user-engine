@@ -1,5 +1,4 @@
-const truncate = require('../utils/truncate')
-const { connect, disconnect } = require('../utils/dbConfig')
+const { connect, disconnect, truncate } = require('../utils/dbHelper')
 const { createUser } = require('../utils/user')
 
 describe('User', () => {

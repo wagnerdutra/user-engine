@@ -1,8 +1,7 @@
 const { res } = require('../../utils/middlewareMock')
-const truncate = require('../../utils/truncate')
 const { createUser } = require('../../utils/user')
 const { makeLogin } = require('../../utils/session')
-const { connect, disconnect } = require('../../utils/dbConfig')
+const { connect, disconnect, truncate } = require('../../utils/dbHelper')
 
 const authMiddleware = require('../../../src/app/middlewares/auth')
 
@@ -15,13 +14,11 @@ describe('AuthMiddleware', () => {
 
   it('should validate token, return the user and call next function', async () => {
     const { user, passwordDecrypted: password } = await createUser()
-    const {
-      body: { token }
-    } = await makeLogin({ ...user, password })
+    const response = await makeLogin({ ...user, password, print: true })
     const nextFunction = jest.fn()
     const req = {
       headers: {
-        authorization: `Bearer ${token}`
+        authorization: `Bearer ${response.body.token}`
       }
     }
     await authMiddleware(req, res, nextFunction)

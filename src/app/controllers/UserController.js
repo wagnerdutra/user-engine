@@ -8,7 +8,21 @@ class UserController {
       return res.status(400).json({ error: 'E-mail already exists' })
     }
 
-    res.json(await User.create(req.body))
+    return res.json(await User.create(req.body))
+  }
+
+  async update(req, res) {
+    const { email, ...rest } = req.body
+
+    if (!(await User.findOne({ email }))) {
+      return res.status(400).json({ error: 'User not found' })
+    }
+
+    const savedUser = await User.findOne({ email })
+
+    Object.keys(rest).forEach(key => (savedUser[key] = rest[key]))
+
+    return res.json(await savedUser.save())
   }
 }
 
