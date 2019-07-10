@@ -1,6 +1,6 @@
 const { res } = require('../../utils/middlewareMock')
 const { createUser } = require('../../utils/user')
-const { makeLogin } = require('../../utils/session')
+const { makeLogin } = require('../../utils/auth')
 const { connect, disconnect, truncate } = require('../../utils/dbHelper')
 
 const authMiddleware = require('../../../src/app/middlewares/auth')

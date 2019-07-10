@@ -1,6 +1,6 @@
 const User = require('../models/User')
 
-class SessionController {
+class AuthController {
   async create(req, res) {
     const { email, password } = req.body
 
@@ -18,4 +18,4 @@ class SessionController {
   }
 }
 
-module.exports = new SessionController()
+module.exports = new AuthController()

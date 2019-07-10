@@ -2,9 +2,9 @@ const request = require('supertest')
 const app = require('../../src/server')
 const { connect, disconnect, truncate } = require('../utils/dbHelper')
 const { createUser } = require('../utils/user')
-const { makeLogin } = require('../utils/session')
+const { makeLogin } = require('../utils/auth')
 
-describe('Session', () => {
+describe('Auth', () => {
   beforeAll(() => connect())
 
   afterAll(() => disconnect())
