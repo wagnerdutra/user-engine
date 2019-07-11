@@ -18,13 +18,13 @@ class UserController {
       .post(`/${scoreEngineCreateUserScoreRoute}`, {
         userId: user.id
       })
-      .then(() => {
-        res.json(user)
-      })
+      .then(() => res.json(user))
       .catch(async err => {
         const status = err.response ? err.response.status : 500
         await user.remove()
-        res.status(status).json(err)
+        return res
+          .status(status)
+          .json(err.response.data || { error: 'Internal server error' })
       })
   }
 

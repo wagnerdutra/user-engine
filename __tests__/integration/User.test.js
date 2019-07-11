@@ -34,4 +34,13 @@ describe('User', () => {
     expect(response.status).toBe(400)
     expect(response.body).toEqual({ error: 'E-mail already exists' })
   })
+
+  it('should not insert the user when score engine request fail', async () => {
+    mock
+      .onPost(`${baseUrl}:${port}/${scoreEngineCreateUserScoreRoute}`)
+      .reply(500, { erro: 'Internal server Error' })
+    const { response: err } = await createUser()
+    expect(err.status).toBe(500)
+    expect(err.body).toEqual({ erro: 'Internal server Error' })
+  })
 })
