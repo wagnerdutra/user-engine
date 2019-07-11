@@ -32,7 +32,7 @@ describe('Auth', () => {
     expect(response.body).toHaveProperty('token')
   })
 
-  it('should not login with a nonexistent password', async () => {
+  it('should not login with a nonexistent email', async () => {
     const response = await makeLogin({
       email: 'teste@gmail.com',
       password: '123345'
