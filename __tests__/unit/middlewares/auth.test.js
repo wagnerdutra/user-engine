@@ -5,6 +5,20 @@ const { connect, disconnect, truncate } = require('../../utils/dbHelper')
 
 const authMiddleware = require('../../../src/app/middlewares/auth')
 
+const axios = require('axios')
+const MockAdapter = require('axios-mock-adapter')
+const mock = new MockAdapter(axios)
+
+const {
+  baseUrl,
+  port,
+  scoreEngineCreateUserScoreRoute
+} = require('../../../src/config/scoreEngine')
+
+mock
+  .onPost(`${baseUrl}:${port}/${scoreEngineCreateUserScoreRoute}`)
+  .reply(200, { ok: true })
+
 describe('AuthMiddleware', () => {
   beforeAll(() => connect())
 

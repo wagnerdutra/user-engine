@@ -1,6 +1,6 @@
 const app = require('../../src/server')
 const request = require('supertest')
-var faker = require('faker/locale/pt_BR')
+const faker = require('faker/locale/pt_BR')
 
 const initialUser = {
   name: faker.name.findName(),

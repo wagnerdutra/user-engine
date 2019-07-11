@@ -1,11 +1,8 @@
-const axios = require('axios')
-
 const User = require('../models/User')
-const {
-  baseUrl,
-  port,
-  scoreEngineCreateUserScoreRoute
-} = require('../../config/scoreEngine')
+
+const { scoreEngineCreateUserScoreRoute } = require('../../config/scoreEngine')
+
+const { scoreEngineHttpRequest } = require('../services/axios')
 
 class UserController {
   async create(req, res) {
@@ -17,8 +14,8 @@ class UserController {
 
     const user = await User.create(req.body)
 
-    return axios
-      .post(`${baseUrl}:${port}/${scoreEngineCreateUserScoreRoute}`, {
+    return scoreEngineHttpRequest
+      .post(`/${scoreEngineCreateUserScoreRoute}`, {
         userId: user.id
       })
       .then(() => {
