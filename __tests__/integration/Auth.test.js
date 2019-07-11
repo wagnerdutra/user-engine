@@ -40,7 +40,7 @@ describe('Auth', () => {
       body: { token }
     } = await makeLogin({ ...user, password })
     const response = await request(app)
-      .put('/')
+      .put('/updateUser')
       .set('Authorization', `Bearer ${token}`)
       .send({ email: user.email, name: 'José Maria ' })
     expect(response.status).toBe(200)
@@ -53,7 +53,7 @@ describe('Auth', () => {
       body: { token }
     } = await makeLogin({ ...user, password })
     const response = await request(app)
-      .put('/')
+      .put('/updateUser')
       .set('Authorization', `Bearer ${token}`)
       .send({ email: 'teste@gmail.com', name: 'José Maria ' })
     expect(response.status).toBe(400)

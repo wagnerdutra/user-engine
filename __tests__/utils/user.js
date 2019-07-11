@@ -10,7 +10,7 @@ const initialUser = {
 
 const createUser = async (user = {}) => {
   const response = await request(app)
-    .post('/')
+    .post('/createUser')
     .send({ ...initialUser, ...user })
   return {
     response,
