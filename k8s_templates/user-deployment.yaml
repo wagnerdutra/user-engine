@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: user-engine
+  labels:
+    name: user-engine
+    version: 0.0.1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: user-engine
+  template:
+    metadata:
+      name: user-engine
+      labels:
+        name: user-engine
+    spec:
+      containers:
+        - name: user-engine
+          image: registry.gitlab.com/kuberheads/user-engine:latest
+      imagePullSecrets:
+        - name: gitlab-registry
