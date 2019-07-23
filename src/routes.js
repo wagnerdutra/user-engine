@@ -4,6 +4,7 @@ const handler = require('express-async-handler')
 
 const UserController = require('./app/controllers/UserController')
 const AuthController = require('./app/controllers/AuthController')
+const MetricsController = require('./app/controllers/MetricsController')
 
 const User = require('./app/validators/User')
 const Auth = require('./app/validators/Auth')
@@ -20,5 +21,9 @@ routes.get(
   handler(authMiddleware),
   handler((_, res) => res.json({ ok: true }))
 )
+
+routes.get('/health', handler(MetricsController.health))
+
+routes.get('/ready', MetricsController.ready)
 
 module.exports = routes
