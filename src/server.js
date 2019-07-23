@@ -19,7 +19,10 @@ class App {
       this.database()
     }
 
-    this.sentry()
+    if (process.env.NODE_ENV === 'production') {
+      this.sentry()
+    }
+
     this.middlewares()
     this.routes()
     this.exception()
