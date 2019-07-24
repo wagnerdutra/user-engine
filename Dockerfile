@@ -10,6 +10,6 @@ RUN yarn && yarn cache clean
 
 COPY . $HOME/node_docker
 
-CMD ["yarn","start"]
+CMD ["yarn","prod"]
 
-EXPOSE 9445
+EXPOSE 9443
