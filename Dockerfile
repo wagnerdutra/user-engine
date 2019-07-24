@@ -1,19 +1,15 @@
-FROM node:alpine
+FROM node:10-slim
 
-# Create app directory
-WORKDIR /usr/src/app
+ENV HOME=/home/app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+COPY package.json $HOME/node_docker/
 
-RUN yarn
-# If you are building your code for production
-# RUN npm ci --only=production
+WORKDIR $HOME/node_docker
 
-# Bundle app source
-COPY . .
+RUN yarn && yarn cache clean
 
-EXPOSE $APP_PORT
-CMD [ "yarn", "prod" ]
+COPY . $HOME/node_docker
+
+CMD ["yarn","start"]
+
+EXPOSE 9443
