@@ -12,4 +12,4 @@ COPY . $HOME/node_docker
 
 CMD ["yarn","start"]
 
-EXPOSE 9443
+EXPOSE 9445
