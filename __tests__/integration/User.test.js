@@ -1,4 +1,4 @@
-const { connect, disconnect, truncate } = require('../utils/dbHelper')
+const DbHelper = require('../utils/dbHelper')
 const { createUser } = require('../utils/user')
 
 const axios = require('axios')
@@ -16,11 +16,11 @@ mock
   .reply(200, { ok: true })
 
 describe('User', () => {
-  beforeAll(() => connect())
+  beforeAll(() => DbHelper.connect())
 
-  afterAll(() => disconnect())
+  afterAll(() => DbHelper.disconnect())
 
-  beforeEach(() => truncate())
+  beforeEach(() => DbHelper.truncate())
 
   it('should create the user', async () => {
     const { response } = await createUser()

@@ -1,6 +1,6 @@
 const request = require('supertest')
 const app = require('../../src/server')
-const { connect, disconnect, truncate } = require('../utils/dbHelper')
+const DbHelper = require('../utils/dbHelper')
 const { createUser } = require('../utils/user')
 const { makeLogin } = require('../utils/auth')
 
@@ -19,11 +19,11 @@ mock
   .reply(200, { ok: true })
 
 describe('Auth', () => {
-  beforeAll(() => connect())
+  beforeAll(() => DbHelper.connect())
 
-  afterAll(() => disconnect())
+  afterAll(() => DbHelper.disconnect())
 
-  beforeEach(() => truncate())
+  beforeEach(() => DbHelper.truncate())
 
   it('should make login and return the token', async () => {
     const { user, passwordDecrypted: password } = await createUser()

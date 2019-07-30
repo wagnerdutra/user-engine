@@ -1,7 +1,7 @@
 const { res } = require('../../utils/middlewareMock')
 const { createUser } = require('../../utils/user')
 const { makeLogin } = require('../../utils/auth')
-const { connect, disconnect, truncate } = require('../../utils/dbHelper')
+const DbHelper = require('../../utils/dbHelper')
 
 const authMiddleware = require('../../../src/app/middlewares/auth')
 
@@ -20,11 +20,11 @@ mock
   .reply(200, { ok: true })
 
 describe('AuthMiddleware', () => {
-  beforeAll(() => connect())
+  beforeAll(() => DbHelper.connect())
 
-  afterAll(() => disconnect())
+  afterAll(() => DbHelper.disconnect())
 
-  beforeEach(() => truncate())
+  beforeEach(() => DbHelper.truncate())
 
   it('should validate token, return the user and call next function', async () => {
     const { user, passwordDecrypted: password } = await createUser()
