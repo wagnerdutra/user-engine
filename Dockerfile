@@ -1,15 +1,13 @@
 FROM node:10-slim
 
-ENV HOME=/home/app
+WORKDIR /usr/src/app
 
-COPY package.json $HOME/node_docker/
+COPY package.json yarn.lock ./
 
-WORKDIR $HOME/node_docker
+RUN yarn
 
-RUN yarn && yarn cache clean
-
-COPY . $HOME/node_docker
-
-CMD ["yarn","prod"]
+COPY . .
 
 EXPOSE 9443
+
+CMD ["yarn","prod"]
