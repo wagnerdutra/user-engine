@@ -8,6 +8,6 @@ RUN yarn
 
 COPY . .
 
-EXPOSE 9443
+EXPOSE 9445
 
 CMD ["yarn","prod"]
