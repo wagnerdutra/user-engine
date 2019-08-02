@@ -23,8 +23,6 @@ class App {
       this.sentry()
     }
 
-    console.log(process.env)
-
     this.middlewares()
     this.routes()
     this.exception()
@@ -44,7 +42,6 @@ class App {
       .then(
         () => {
           console.log('Connected!')
-          console.log('on port: ', process.env.APP_PORT)
         },
         err => {
           console.log(err)
