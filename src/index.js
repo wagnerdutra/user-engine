@@ -1,5 +1,7 @@
-const server = require('./server')
+require('dotenv').config({
+  path: process.env.NODE_ENV === 'test' ? '.env.local' : '.env'
+})
 
-console.log(process.env.PORT)
+const server = require('./server')
 
 server.listen(process.env.PORT || 3000)
