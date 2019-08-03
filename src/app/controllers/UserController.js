@@ -20,6 +20,7 @@ class UserController {
       })
       .then(() => res.json(user))
       .catch(async err => {
+        console.log(err)
         const status = err.response ? err.response.status : 500
         await user.remove()
         return res
