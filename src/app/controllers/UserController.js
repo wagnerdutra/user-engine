@@ -20,12 +20,15 @@ class UserController {
       })
       .then(() => res.json(user))
       .catch(async err => {
-        console.log(err)
         const status = err.response ? err.response.status : 500
         await user.remove()
         return res
           .status(status)
-          .json(err.response.data || { error: 'Internal server error' })
+          .json(
+            err.response
+              ? err.response.data
+              : { error: 'Internal server error' }
+          )
       })
   }
 
